@@ -134,7 +134,7 @@ jobs:
   # Reference: https://github.community/t/127354/7.
   check_coverage_results:
     name: Check Code Coverage Results
-    needs: [ evaluate-code-coverage-reports, comment_coverage_report ]
+    needs: [ evaluate-code-coverage-reports ]
     # The expression if: ${{ !cancelled() }} runs a job or step regardless of its success or failure while responding to cancellations,
     # serving as a cancellation-compliant alternative to if: ${{ always() }} in concurrent workflows.
     if: ${{ !cancelled()}}
