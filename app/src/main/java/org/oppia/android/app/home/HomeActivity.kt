@@ -23,7 +23,7 @@ import org.oppia.android.util.profile.CurrentUserProfileIdIntentDecorator.decora
 import org.oppia.android.util.profile.CurrentUserProfileIdIntentDecorator.extractCurrentUserProfileId
 import javax.inject.Inject
 
-/** The central activity for all users entering the app. HomeActivity*/
+/** The central activity for all users entering the app. */
 class HomeActivity :
   InjectableAutoLocalizedAppCompatActivity(),
   RouteToTopicListener,

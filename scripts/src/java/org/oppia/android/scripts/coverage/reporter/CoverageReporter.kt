@@ -505,14 +505,14 @@ class CoverageReporter(
       append("> To learn more, visit the [Oppia Android Code Coverage](https://github.com/oppia/oppia-android/wiki/Oppia-Android-Code-Coverage) wiki page")
     }
 
-    val wikiPageLinkNote = buildString {
-      val wikiPageReferenceNote = ">To learn more, visit the [Oppia Android Code Coverage]" +
-        "(https://github.com/oppia/oppia-android/wiki/Oppia-Android-Code-Coverage) wiki page"
-      append("\n\n")
-      append("#")
-      append("\n")
-      append(wikiPageReferenceNote)
-    }
+    // val wikiPageLinkNote = buildString {
+    //   val wikiPageReferenceNote = ">To learn more, visit the [Oppia Android Code Coverage]" +
+    //     "(https://github.com/oppia/oppia-android/wiki/Oppia-Android-Code-Coverage) wiki page"
+    //   append("\n\n")
+    //   append("#")
+    //   append("\n")
+    //   append(wikiPageReferenceNote)
+    // }
 
     val finalReportText = coverageReportContainer.coverageReportList.takeIf { it.isNotEmpty() }
       ?.let {
@@ -526,7 +526,7 @@ class CoverageReporter(
           failureMarkdownEntries +
           successMarkdownEntries +
           testFileExemptedSection +
-          wikiPageLinkNote
+          // wikiPageLinkNote
       } ?: skipCoverageReportText
 
     val finalReportOutputPath = mdReportOutputPath
