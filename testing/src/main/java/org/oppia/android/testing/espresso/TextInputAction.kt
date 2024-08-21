@@ -7,7 +7,7 @@ import org.hamcrest.Description
 
 /**
  * Action for matching error text and performing other actions on [TextInputLayout] in a test
- * infrastructure-specific way TIA.
+ * infrastructure-specific way .
  */
 class TextInputAction {
 
