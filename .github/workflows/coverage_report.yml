@@ -8,6 +8,10 @@ name: Coverage Report
 on:
   pull_request_target:
     types: [assigned, opened, synchronize, reopened]
+  push:
+    branches:
+      # Push events on develop branch
+      - develop
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}-${{ github.ref }}
