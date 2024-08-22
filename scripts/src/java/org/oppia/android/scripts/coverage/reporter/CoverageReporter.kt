@@ -9,7 +9,7 @@ import java.io.File
 /** Minimum coverage percentage required. */
 const val MIN_THRESHOLD = 70
 
-/* ANSI escape codes for colors. */
+/* ANSI escape color codes. */
 
 /** Green text. */
 const val GREEN = "\u001B[32m"
