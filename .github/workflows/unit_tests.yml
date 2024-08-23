@@ -13,7 +13,7 @@ on:
       - develop
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -152,6 +152,7 @@ jobs:
           bazel run //scripts:retrieve_affected_tests -- $AFFECTED_TESTS_BUCKET_BASE64 $(pwd)/test_bucket_name $(pwd)/bazel_test_targets
           TEST_CATEGORY=$(cat ./test_bucket_name)
           BAZEL_TEST_TARGETS=$(cat ./bazel_test_targets)
+          echo "Concurrency grouping name: ${{ github.workflow }}-${{ github.event.pull_request.number }}-${{ github.ref }}"
           echo "Test category: $TEST_CATEGORY"
           echo "Bazel test targets: $BAZEL_TEST_TARGETS"
           echo "TEST_CACHING_BUCKET=$TEST_CATEGORY" >> $GITHUB_ENV
