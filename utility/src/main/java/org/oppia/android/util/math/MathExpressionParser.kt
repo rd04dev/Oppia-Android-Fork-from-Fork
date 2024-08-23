@@ -75,7 +75,7 @@ import org.oppia.android.app.model.MathUnaryOperation.Operator as UnaryOperator
  * LL(1) grammar for both simplicity and long-term maintainability (as it's likely additional
  * functionality will need to be added to the language).
  *
- * To use the parser:
+ * To use the parser 3:
  * - Call [parseNumericExpression] for numeric expressions
  * - Call [parseAlgebraicExpression] for algebraic expressions
  * - Call [parseAlgebraicEquation] for algebraic equations
