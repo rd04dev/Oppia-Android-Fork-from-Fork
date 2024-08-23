@@ -153,6 +153,7 @@ jobs:
           TEST_CATEGORY=$(cat ./test_bucket_name)
           BAZEL_TEST_TARGETS=$(cat ./bazel_test_targets)
           echo "Concurrency grouping name: ${{ github.workflow }}-${{ github.event.pull_request.number }}-${{ github.ref }}"
+          echo "Concurrency group with run id: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}"
           echo "Test category: $TEST_CATEGORY"
           echo "Bazel test targets: $BAZEL_TEST_TARGETS"
           echo "TEST_CACHING_BUCKET=$TEST_CATEGORY" >> $GITHUB_ENV
