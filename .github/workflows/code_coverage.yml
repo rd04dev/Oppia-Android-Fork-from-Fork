@@ -255,7 +255,7 @@ jobs:
           name: coverage-report-${{ env.SHARD_NAME }} # Saving with unique names to avoid conflict
           path: coverage_reports
 
-  evaluate-code-coverage-reports:
+  evaluate_code_coverage_reports:
     name: Evaluate Code Coverage Reports
     runs-on: ubuntu-20.04
     needs: code_coverage_run
@@ -311,7 +311,7 @@ jobs:
   # Reference: https://github.community/t/127354/7.
   check_coverage_results:
     name: Check Code Coverage Results
-    needs: [ compute_changed_files, code_coverage_run, evaluate-code-coverage-reports ]
+    needs: [ compute_changed_files, code_coverage_run, evaluate_code_coverage_reports ]
     # The expression if: ${{ !cancelled() }} runs a job or step regardless of its success or failure while responding to cancellations,
     # serving as a cancellation-compliant alternative to if: ${{ always() }} in concurrent workflows.
     if: ${{ !cancelled() }}
@@ -322,5 +322,5 @@ jobs:
         run: exit 1
 
       - name: Check that coverage status is passed
-        if: ${{ needs.compute_changed_files.outputs.can_skip_files != 'true' && needs.evaluate-code-coverage-reports.result != 'success' }}
+        if: ${{ needs.compute_changed_files.outputs.can_skip_files != 'true' && needs.evaluate_code_coverage_reports.result != 'success' }}
         run: exit 1
