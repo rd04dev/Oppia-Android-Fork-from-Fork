@@ -9,8 +9,8 @@
 # What is RTL?
 The main difference between left-to-right (LTR) and right-to-left (RTL) language scripts is the direction in which content is displayed:
 
-* LTR languages display content from left to right
-* RTL languages display content from right to left
+* LTR languages display content from left to - right
+* RTL languages display content from right to - left
 
 RTL content also affects the direction in which some icons and images are displayed, particularly those depicting a sequence of events.
 
