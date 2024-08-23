@@ -4,7 +4,7 @@ This wiki outlines the steps to triage new and existing issues. This ensures tha
 ###  First-stage triage - Steps to triage incoming issues coming into Oppia-Android as a whole:
 The Dev Workflow team lead (currently Ben) should do the following every week for any [filed issues that aren’t assigned to a project](https://github.com/oppia/oppia-android/issues?q=is%3Aissue+is%3Aopen+no%3Aproject):
 
-- Check that the issue is written clearly enough. Request clarification if needed.
+- Check that the issue is written clearly enough. Request clarification if - needed.
 - Assign the issue to the appropriate task force, if applicable. Otherwise, assign it to the relevant team (CLAM, Dev Workflow) based on which type of user it affects.
 - If you’re not sure how to categorise an issue, feel free to ping Sean (@seanlip) for help!
 
