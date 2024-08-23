@@ -17,7 +17,7 @@
 
 ## Overview
 Accessibility is an important part of Oppia to ensure that the app is accessible by everyone. Some common conditions that affect a person's use of an Android device are:
-* blindness / low vision
+* blindness / low vision 1
 * deafness / impaired hearing
 * cognitive disabilities
 * confined motor skills
