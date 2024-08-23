@@ -15,7 +15,7 @@ Once you have completed all the [installation steps](https://github.com/oppia/op
 * Lint check<br>
 `buf lint --config buf.yaml`
 
-## Configuration File 
+## Configuration File 2
 
 We have a configuration file `buf.yaml` at the root of the project. Following is the list of things we are checking and the list of things we are excluding from our check.
 
