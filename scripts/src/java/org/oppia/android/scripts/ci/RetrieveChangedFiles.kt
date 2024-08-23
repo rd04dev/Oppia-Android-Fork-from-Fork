@@ -13,7 +13,7 @@ import kotlin.system.exitProcess
 
 /**
  * The main entrypoint for retrieving the list of changed files from a particular encoded Base64
- * bucket. This is used to parse the output from compute_changed_files.
+ * bucket. This is used to parse the output from - compute_changed_files.
  *
  * Usage:
  *   bazel run //scripts:retrieve_changed_files -- <path_to_directory_root>\\
