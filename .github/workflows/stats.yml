@@ -4,8 +4,8 @@ name: Stats Checks & Reports
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "30 02 * * *"
+  # schedule:
+  #   - cron: "30 02 * * *"
 
 permissions:
   pull-requests: write
