@@ -264,11 +264,11 @@ jobs:
             cat static_text_file.txt
             echo EOF
           } >> "$GITHUB_OUTPUT"
-          FULL_BUILD_SUMMARY_FILE_NAME="full_build_summary_pr_$PR_NUMBER.log"
-          FULL_BUILD_SUMMARY_FILE_PATH="$GITHUB_WORKSPACE/develop/$FULL_BUILD_SUMMARY_FILE_NAME"
-          echo "FULL_BUILD_SUMMARY_FILE_NAME=$FULL_BUILD_SUMMARY_FILE_NAME" >> "$GITHUB_ENV"
-          echo "FULL_BUILD_SUMMARY_FILE_PATH=$FULL_BUILD_SUMMARY_FILE_PATH" >> "$GITHUB_ENV"
-          cp "$GITHUB_WORKSPACE/develop/full_build_summary.log" "$FULL_BUILD_SUMMARY_FILE_PATH"
+          # FULL_BUILD_SUMMARY_FILE_NAME="full_build_summary_pr_$PR_NUMBER.log"
+          # FULL_BUILD_SUMMARY_FILE_PATH="$GITHUB_WORKSPACE/develop/$FULL_BUILD_SUMMARY_FILE_NAME"
+          # echo "FULL_BUILD_SUMMARY_FILE_NAME=$FULL_BUILD_SUMMARY_FILE_NAME" >> "$GITHUB_ENV"
+          # echo "FULL_BUILD_SUMMARY_FILE_PATH=$FULL_BUILD_SUMMARY_FILE_PATH" >> "$GITHUB_ENV"
+          # cp "$GITHUB_WORKSPACE/develop/full_build_summary.log" "$FULL_BUILD_SUMMARY_FILE_PATH"
 
       - name: Add build stats summary comment
         if: ${{ steps.build-comparison.outcome == 'success' }}
