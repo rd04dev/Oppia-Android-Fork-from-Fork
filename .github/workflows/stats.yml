@@ -221,7 +221,7 @@ jobs:
         continue-on-error: true # Ignore errors if the file doesn't exist (first run)
 
       - name: Create a file with static text
-        run: echo "Changed content to trigger comment." > static_text_file.txt
+        run: echo "Changed content to trigger comment 2." > static_text_file.txt
 
       - name: Print current directory
         run: pwd
@@ -239,7 +239,7 @@ jobs:
               echo "skip_comment=true" >> $GITHUB_ENV
             else
               echo "Changes detected; proceeding with the comment."
-              echo "skip_comment=true" >> $GITHUB_ENV
+              echo "skip_comment=false" >> $GITHUB_ENV
             fi
           else
             echo "No previous summary found; proceeding with the comment."
