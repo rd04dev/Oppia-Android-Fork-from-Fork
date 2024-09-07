@@ -220,7 +220,7 @@ jobs:
         continue-on-error: true # Ignore errors if the file doesn't exist (first run)
 
       - name: Create a file with static text
-        run: echo "Test static text as builds take zzzzzzz long." > static_text_file.txt
+        run: echo "Test static text as builds take zzzzzzz long." > static_text_file2.txt
 
       - name: Print current directory
         run: pwd
