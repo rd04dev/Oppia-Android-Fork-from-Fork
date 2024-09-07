@@ -227,7 +227,7 @@ jobs:
         run: pwd
       
       - name: List files in the current directory
-        run: ls -l
+        run: ls -laR
 
       - name: Compare current build summary with the previous one
         id: build-comparison
