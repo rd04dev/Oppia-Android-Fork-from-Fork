@@ -236,7 +236,7 @@ jobs:
             echo "Comparing current and previous build summaries..."
             if diff static_text_file.txt ./previous_build_logs/static_text_file.txt > /dev/null; then
               echo "No significant changes detected; skipping comment."
-              exit 0
+              exit 1
             else
               echo "Changes detected; proceeding with the comment."
             fi
