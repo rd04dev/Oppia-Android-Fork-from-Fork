@@ -221,7 +221,7 @@ jobs:
         continue-on-error: true # Ignore errors if the file doesn't exist (first run)
 
       - name: Create a file with static text
-        run: echo "Test static text as builds take zzzzzzz long." > static_text_file2.txt
+        run: echo "Test static text as builds take zzzzzzz long." > static_text_file.txt
 
       - name: Print current directory
         run: pwd
@@ -234,7 +234,7 @@ jobs:
         run: |
           if [ -f static_text_file.txt ]; then
             echo "Comparing current and previous build summaries..."
-            if diff static_text_file.txt static_text_file2.txt > /dev/null; then
+            if diff static_text_file.txt ./previous_build_logs/static_text_file.txt > /dev/null; then
               echo "No significant changes detected; skipping comment."
               exit 0
             else
