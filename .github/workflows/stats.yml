@@ -222,6 +222,12 @@ jobs:
       - name: Create a file with static text
         run: echo "Test static text as builds take zzzzzzz long." > static_text_file.txt
 
+      - name: Print current directory
+        run: pwd
+      
+      - name: List files in the current directory
+        run: ls -l
+
       - name: Compare current build summary with the previous one
         id: build-comparison
         run: |
