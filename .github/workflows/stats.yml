@@ -202,7 +202,7 @@ jobs:
             const runs = runsResponse.data.workflow_runs;
             runs.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
   
-            const run = runs[0];
+            const run = runs[1];
             if(!run) {
               core.setFailed('Could not find a succesful workflow run for the PR');
               return;
