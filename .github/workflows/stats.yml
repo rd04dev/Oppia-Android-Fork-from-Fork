@@ -233,7 +233,7 @@ jobs:
         run: |
           if [ -f static_text_file.txt ]; then
             echo "Comparing current and previous build summaries..."
-            if diff static_text_file.txt brief_build_summary_${{ matrix.prInfo.number }} > /dev/null; then
+            if diff static_text_file.txt static_text_file2.txt > /dev/null; then
               echo "No significant changes detected; skipping comment."
               exit 0
             else
