@@ -227,7 +227,7 @@ jobs:
         run: pwd
       
       - name: List files in the current directory
-        run: ls -laR
+        run: ls -l
 
       - name: Compare current build summary with the previous one
         id: build-comparison
@@ -243,7 +243,6 @@ jobs:
           else
             echo "No previous summary found; proceeding with the comment."
           fi
-        continue-on-error: true
         
       - name: Upload current build summary for future comparison
         uses: actions/upload-artifact@v4
