@@ -236,14 +236,15 @@ jobs:
             echo "Comparing current and previous build summaries..."
             if diff static_text_file.txt ./previous_build_logs/static_text_file.txt > /dev/null; then
               echo "No significant changes detected; skipping comment."
-              exit 1
+              echo "skip_comment=true" >> $GITHUB_ENV
             else
               echo "Changes detected; proceeding with the comment."
+              echo "skip_comment=true" >> $GITHUB_ENV
             fi
           else
             echo "No previous summary found; proceeding with the comment."
+            echo "skip_comment=false" >> $GITHUB_ENV
           fi
-        continue-on-error: true
         
       - name: Upload current build summary for future comparison
         uses: actions/upload-artifact@v4
@@ -271,7 +272,7 @@ jobs:
           # cp "$GITHUB_WORKSPACE/develop/full_build_summary.log" "$FULL_BUILD_SUMMARY_FILE_PATH"
 
       - name: Add build stats summary comment
-        if: ${{ steps.build-comparison.outcome == 'success' }}
+        if: ${{ env.skip_comment == 'false' }}
         env:
           PR_NUMBER: ${{ matrix.prInfo.number }}
         uses: peter-evans/create-or-update-comment@v1
