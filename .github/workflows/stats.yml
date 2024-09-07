@@ -231,7 +231,7 @@ jobs:
       - name: Compare current build summary with the previous one
         id: build-comparison
         run: |
-          if [ -f brief_build_summary_${{ matrix.prInfo.number }} ]; then
+          if [ -f static_text_file.txt ]; then
             echo "Comparing current and previous build summaries..."
             if diff static_text_file.txt brief_build_summary_${{ matrix.prInfo.number }} > /dev/null; then
               echo "No significant changes detected; skipping comment."
