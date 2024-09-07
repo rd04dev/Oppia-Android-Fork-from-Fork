@@ -212,7 +212,7 @@ jobs:
             core.setOutput('run-id', run.id);
 
       - name: Download previous build summary
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: brief_build_summary_${{ matrix.prInfo.number }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -239,7 +239,7 @@ jobs:
         continue-on-error: true
         
       - name: Upload current build summary for future comparison
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: brief_build_summary_${{ matrix.prInfo.number }}
           path: static_text_file.txt
