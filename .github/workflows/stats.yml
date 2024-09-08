@@ -220,7 +220,7 @@ jobs:
         continue-on-error: true # Ignore errors if the file doesn't exist (first run)
       
       - name: List files in the current directory
-        run: ls -l
+        run: ls -lR previous_build_logs
 
       - name: Compare current build summary with the previous one
         id: build-comparison
