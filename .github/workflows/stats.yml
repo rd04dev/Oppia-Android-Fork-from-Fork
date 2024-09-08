@@ -218,9 +218,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ steps.find-workflow-run.outputs.run-id }}
         continue-on-error: true # Ignore errors if the file doesn't exist (first run)
-      
-      - name: List files in the current directory
-        run: ls -lR previous_build_logs
 
       - name: Compare current build summary with the previous one
         id: build-comparison
