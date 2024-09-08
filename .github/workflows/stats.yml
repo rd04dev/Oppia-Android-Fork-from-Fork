@@ -229,7 +229,7 @@ jobs:
             echo "Comparing current and previous build summaries..."
             if diff ./develop/brief_build_summary.log ./previous_build_logs/brief_build_summary.log > /dev/null; then
               echo "No significant changes detected; skipping comment."
-              echo "skip_comment=false" >> $GITHUB_ENV
+              echo "skip_comment=true" >> $GITHUB_ENV
             else
               echo "Changes detected; proceeding with the comment."
               echo "skip_comment=false" >> $GITHUB_ENV
