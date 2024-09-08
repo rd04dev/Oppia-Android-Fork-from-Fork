@@ -214,7 +214,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: brief_build_summary_${{ matrix.prInfo.number }}
-          path: $GITHUB_WORKSPACE/previous_build_logs
+          path: ./previous_build_logs
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ steps.find-workflow-run.outputs.run-id }}
         continue-on-error: true # Ignore errors if the file doesn't exist (first run)
@@ -227,9 +227,9 @@ jobs:
         run: |
           if [ -f ./develop/brief_build_summary.log ]; then
             echo "Comparing current and previous build summaries..."
-            if diff $GITHUB_WORKSPACE/develop/brief_build_summary.log $GITHUB_WORKSPACE/previous_build_logs/develop/brief_build_summary.log > /dev/null; then
+            if diff ./develop/brief_build_summary.log ./previous_build_logs/develop/brief_build_summary.log > /dev/null; then
               echo "No significant changes detected; skipping comment."
-              echo "skip_comment=true" >> $GITHUB_ENV
+              echo "skip_comment=false" >> $GITHUB_ENV
             else
               echo "Changes detected; proceeding with the comment."
               echo "skip_comment=false" >> $GITHUB_ENV
@@ -243,7 +243,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: brief_build_summary_${{ matrix.prInfo.number }}
-          path: $GITHUB_WORKSPACE/develop/brief_build_summary.log
+          path: ./develop/brief_build_summary.log
       
       # Reference: https://github.com/peter-evans/create-or-update-comment#setting-the-comment-body-from-a-file.
       # Also, for multi-line env values, see: https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings.
@@ -254,8 +254,7 @@ jobs:
         run: |
           {
             echo 'comment_body<<EOF'
-            # cat $GITHUB_WORKSPACE/develop/brief_build_summary.log
-            cat static_text_file.txt
+            cat ./develop/brief_build_summary.log
             echo EOF
           } >> "$GITHUB_OUTPUT"
           FULL_BUILD_SUMMARY_FILE_NAME="full_build_summary_pr_$PR_NUMBER.log"
