@@ -251,7 +251,7 @@ jobs:
         run: |
           {
             echo 'comment_body<<EOF'
-            cat ./develop/brief_build_summary.log
+            cat $GITHUB_WORKSPACE/develop/brief_build_summary.log
             echo EOF
           } >> "$GITHUB_OUTPUT"
           FULL_BUILD_SUMMARY_FILE_NAME="full_build_summary_pr_$PR_NUMBER.log"
