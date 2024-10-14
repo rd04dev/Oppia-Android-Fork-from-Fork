@@ -156,8 +156,8 @@ jobs:
           body-includes: endpoint
           direction: last
       - run: |
-          ${{ steps.fc.outputs.comment-body }} > yii.txt
-          cat yii.txt
+          echo "${{ steps.fc.outputs.comment-body }}" | base64 > comment_base64.txt
+          cat comment_base64.txt
 
 
       - name: Latest Comment
