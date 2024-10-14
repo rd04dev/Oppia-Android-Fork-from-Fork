@@ -155,6 +155,8 @@ jobs:
           issue-number: 39
           body-includes: endpoint
           direction: last
+      - run: |
+          echo ${{ steps.fc.outputs.comment-body }}
 
 
       - name: Latest Comment
