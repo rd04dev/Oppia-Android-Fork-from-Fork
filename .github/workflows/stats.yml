@@ -191,7 +191,13 @@ jobs:
           echo ">To learn more, visit the [Oppia Android Code Coverage](https://github.com/oppia/oppia-android/wiki/Oppia-Android-Code-Coverage) wiki page." >> cov.log
           log_content=$(cat cov.log)
 
-          if [[ "$log_content" == "${{ steps.fc-cr.outputs.comment-body }}" ]]; then
+          if [[ $(cat cov.log) == "${{ steps.fc-cr.outputs.comment-body }}" ]]; then
+            echo "same"
+          else
+            echo "not same"
+          fi
+
+          if [[ $(cat cov.log) == ${{ steps.fc-cr.outputs.comment-body }} ]]; then
             echo "same"
           else
             echo "not same"
