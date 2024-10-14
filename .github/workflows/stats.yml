@@ -148,6 +148,25 @@ jobs:
           ref: ${{ env.PR_HEAD_REF_NAME }}
           path: head
 
+      - name: Fetch PR Comments
+        uses: actions/github-script@v6
+        with:
+          script: |
+            async function fetchComments() {
+              const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+              const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
+              const issueNumber = context.payload.pull_request.number;
+
+              return await octokit.paginate(octokit.rest.issues.listComments, {
+                owner,
+                repo,
+                issue_number: issueNumber,
+              });
+            }
+
+            const comments = await fetchComments();
+            console.log("PR Comments:", comments);
+
       - name: Find Comment
         uses: peter-evans/find-comment@v3
         id: fc
