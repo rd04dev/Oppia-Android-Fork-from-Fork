@@ -148,6 +148,15 @@ jobs:
           ref: ${{ env.PR_HEAD_REF_NAME }}
           path: head
 
+
+      - name: Latest Comment
+        id: latest-comment
+        run: |
+          comments_url="https://api.github.com/repos/Rd4dev/Oppia-Android-Fork-from-Fork/issues/39/comments"
+          comments_response=$(curl -s -H $comments_url)
+          last_comment=$(echo "$comments_response" | jq -r '.[-1].body')
+          echo "Latest PR Comment: $last_comment"
+
       # Note that Bazel is shutdown between builds since multiple Bazel servers will otherwise end
       # up being active (due to multiple repositories being used) and this can quickly overwhelm CI
       # worker resources.
