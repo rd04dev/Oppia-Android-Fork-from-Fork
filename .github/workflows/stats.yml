@@ -148,7 +148,7 @@ jobs:
           ref: ${{ env.PR_HEAD_REF_NAME }}
           path: head
 
-      - name: Find Comment
+      - name: Find Comment APK AAB
         uses: peter-evans/find-comment@v3
         id: fc
         with:
@@ -156,8 +156,17 @@ jobs:
           body-includes: APK & AAB differences analysis
           direction: last
       - run: |
-          echo "${{ steps.fc.outputs.comment-body }}" | base64 > comment_base64.txt
-          cat comment_base64.txt
+          echo "${{ steps.fc.outputs.comment-body }}" 
+
+      - name: Find Comment Cov Rep
+        uses: peter-evans/find-comment@v3
+        id: fc-cr
+        with:
+          issue-number: 39
+          body-includes: Coverage Report
+          direction: last
+      - run: |
+          echo "${{ steps.fc.outputs.comment-body }}" 
 
 
       - name: Latest Comment
