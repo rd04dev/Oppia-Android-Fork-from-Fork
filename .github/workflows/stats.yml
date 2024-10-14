@@ -170,7 +170,7 @@ jobs:
 
       - name: Test compare cov.log
         run: |
-          echo "## Coverage Report" > cov.log
+          echo "## Coverage Report" >> cov.log
           echo "" >> cov.log
           echo "### Results" >> cov.log
           echo "Number of files assessed: 2" >> cov.log
