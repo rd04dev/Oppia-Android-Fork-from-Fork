@@ -173,7 +173,7 @@ jobs:
           echo "## Coverage Report" >> cov.log
           log_content=$(cat cov.log)
 
-          if [[ "log_content" == "${{ steps.fc-cr.outputs.comment-body }}"; then
+          if [[ "log_content" == "${{ steps.fc-cr.outputs.comment-body }}" ]]; then
             echo "same"
           else
             echo "not same"
