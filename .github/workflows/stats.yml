@@ -157,6 +157,22 @@ jobs:
           last_comment=$(echo "$comments_response" | jq -r '.[-1].body')
           echo "Latest PR Comment: $last_comment"
 
+      - name: Latest comment with curl and hint from external
+        id: uhm-ext
+        run: |
+          comments_url="https://api.github.com/repos/Rd4dev/Oppia-Android-Fork-from-Fork/issues/39/comments"
+          comments=()
+
+          while [ -n "$comments_url" ]; do
+              response=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "$comments_url")
+              comments+=("$response")
+              
+              comments_url=$(echo "$response" | grep -o '<[^>]*>; rel="next"' | sed -e 's/<\([^>]*\)>; rel="next"/\1/')
+          done
+
+          all_comments=$(printf '%s\n' "${comments[@]}")
+          echo "$all_comments"
+
       # Note that Bazel is shutdown between builds since multiple Bazel servers will otherwise end
       # up being active (due to multiple repositories being used) and this can quickly overwhelm CI
       # worker resources.
