@@ -156,7 +156,8 @@ jobs:
           body-includes: endpoint
           direction: last
       - run: |
-          printf "${{ steps.fc.outputs.comment-body }}"
+          echo "${{ steps.fc.outputs.comment-body }}" > yii.txt
+          cat yii.txt
 
 
       - name: Latest Comment
