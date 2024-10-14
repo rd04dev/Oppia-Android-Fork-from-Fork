@@ -171,26 +171,8 @@ jobs:
       - name: Test compare cov.log
         run: |
           echo "## Coverage Report" >> cov.log
-          echo "" >> cov.log
-          echo "### Results" >> cov.log
-          echo "Number of files assessed: 2" >> cov.log
-          echo "Overall Coverage: **0.00%**" >> cov.log
-          echo "Coverage Analysis: **PASS** :white_check_mark:" >> cov.log
-          echo "" >> cov.log
-          echo "### Exempted coverage" >> cov.log
-          echo "<details><summary>Files exempted from coverage</summary><br>" >> cov.log
-          echo "" >> cov.log
-          echo "| File | Exemption Reason |" >> cov.log
-          echo "|------|------------------|" >> cov.log
-          echo "| <details><summary><b>StateFragment.kt</b></summary>app/src/main/java/org/oppia/android/app/player/state/StateFragment.kt</details> | This file is incompatible with code coverage tooling; skipping coverage check. |" >> cov.log
-          echo "| <details><summary><b>DragAndDropSortInteractionViewModel.kt</b></summary>app/src/main/java/org/oppia/android/app/player/state/itemviewmodel/DragAndDropSortInteractionViewModel.kt</details> | This file is exempted from having a test file; skipping coverage check. |" >> cov.log
-          echo "" >> cov.log
-          echo ">Refer [test_file_exemptions.textproto](https://github.com/oppia/oppia-android/blob/develop/scripts/assets/test_file_exemptions.textproto) for the comprehensive list of file exemptions and their required coverage percentages.</details>" >> cov.log
-          echo "" >> cov.log
-          echo "#" >> cov.log
-          echo ">To learn more, visit the [Oppia Android Code Coverage](https://github.com/oppia/oppia-android/wiki/Oppia-Android-Code-Coverage) wiki page." >> cov.log
 
-          if diff cov.log ${{ steps.fc.outputs.comment-body }} > /dev/null; then
+          if diff cov.log ${{ steps.fc-cr.outputs.comment-body }} > /dev/null; then
             echo "No significant changes detected; skipping comment."
             echo "skip_comment=true" >> $GITHUB_ENV
           else
