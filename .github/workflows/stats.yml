@@ -172,13 +172,6 @@ jobs:
         run: |
           echo "## Coverage Report" >> cov.log
 
-          if diff cov.log ${{ steps.fc-cr.outputs.comment-body }} > /dev/null; then
-            echo "No significant changes detected; skipping comment."
-            echo "skip_comment=true" >> $GITHUB_ENV
-          else
-            echo "Changes detected; proceeding with the comment."
-            echo "skip_comment=false" >> $GITHUB_ENV
-          fi
 
 
       - name: Latest Comment
