@@ -158,8 +158,8 @@ jobs:
               const issueNumber = context.payload.pull_request.number;
 
               return await octokit.paginate(octokit.rest.issues.listComments, {
-                Rd4dev,
-                Oppia-Android-Fork-from-Fork,
+                owner,
+                repo,
                 issue_number: 39,
               });
             }
