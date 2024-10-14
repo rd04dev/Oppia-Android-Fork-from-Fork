@@ -166,7 +166,7 @@ jobs:
           body-includes: Coverage Report
           direction: last
       - run: |
-          echo "${{ steps.fc.outputs.comment-body }}" 
+          echo "${{ steps.fc-cr.outputs.comment-body }}" 
 
 
       - name: Latest Comment
