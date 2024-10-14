@@ -152,6 +152,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            import * as github from '@actions/github'
             async function fetchComments() {
               const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
               const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
