@@ -47,7 +47,7 @@ jobs:
           body-includes: Coverage Report
           direction: last
       - run: |
-          echo "${{ steps.last-coverage-report.outputs.comment-body }}" > comment.md
+          echo "${{ steps.last-coverage-report.outputs.comment-body }}" >> comment.md
     
       - name: Find CI workflow run for PR
         id: find-workflow-run
@@ -98,10 +98,16 @@ jobs:
             echo "skip_coverage_comment=false" >> $GITHUB_ENV
           fi
 
+          echo "Coverage comment md file......."
+          echo "$(cat comment.md)"
+          echo "Coverage Report md file......."
+          echo "$(cat CoverageReport.md)"
+
       - name: Upload Coverage Report as PR Comment
         if: ${{ env.skip_coverage_comment == 'false' }}
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body-path: 'CoverageReport.md'
+          
           
