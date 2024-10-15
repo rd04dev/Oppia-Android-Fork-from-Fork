@@ -89,14 +89,14 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body-path: 'CoverageReport.md'
-      - run:
+      - run: |
           echo "${{ steps.fc-cr.outputs.comment-body }}" > comment.md
       
-          echo "Content of CoverageReport.md:"
-          echo $(cat CoverageReport.md)
+          # echo "Content of CoverageReport.md:"
+          # echo $(cat CoverageReport.md)
       
-          echo "Content of comment.md:"
-          echo $(cat comment.md)
+          # echo "Content of comment.md:"
+          # echo $(cat comment.md)
       
           if diff CoverageReport.md comment.md > /dev/null; then
             echo "No significant changes detected; skipping comment."
