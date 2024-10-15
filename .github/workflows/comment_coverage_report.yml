@@ -91,7 +91,7 @@ jobs:
           body-path: 'CoverageReport.md'
       - run:
           echo "$(cat CoverageReport.md)"
-          if diff CoverageReport.md ${{ steps.fc-cr.outputs.comment-body }} > /dev/null; then
+          if diff $(cat CoverageReport.md) ${{ steps.fc-cr.outputs.comment-body }} > /dev/null; then
             echo "No significant changes detected; skipping comment."
             echo "skip_comment=true" >> $GITHUB_ENV
           else
