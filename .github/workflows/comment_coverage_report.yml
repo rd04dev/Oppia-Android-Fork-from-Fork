@@ -94,6 +94,7 @@ jobs:
             echo "skip_coverage_comment=true" >> $GITHUB_ENV
           else
             echo "Changes detected; proceeding with the coverage comment."
+            diff CoverageReport.md comment.md || true
             echo "skip_coverage_comment=false" >> $GITHUB_ENV
           fi
 
