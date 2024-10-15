@@ -39,15 +39,15 @@ jobs:
     if: ${{ !cancelled() }}  
     runs-on: ubuntu-latest   
     steps:
-      - name: Find Comment Cov Rep
+      - name: Find the last Coverage Report
         uses: peter-evans/find-comment@v3
-        id: fc-cr
+        id: last-coverage-report
         with:
-          issue-number: 39
+          issue-number: ${{ github.event.pull_request.number }}
           body-includes: Coverage Report
           direction: last
       - run: |
-          echo "${{ steps.fc-cr.outputs.comment-body }}" 
+          echo "${{ steps.last-coverage-report.outputs.comment-body }}" > comment.md
     
       - name: Find CI workflow run for PR
         id: find-workflow-run
@@ -83,16 +83,6 @@ jobs:
           name: final-coverage-report
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ steps.find-workflow-run.outputs.run-id }}
-
-      - name: Uhm. lets see if this works
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          issue-number: ${{ github.event.pull_request.number }}
-          body-path: 'CoverageReport.md'
-      
-      - name: Save the comment body to file
-        run: |
-          echo "${{ steps.fc-cr.outputs.comment-body }}" > comment.md
       
       - name: Compare coverage report with the comment body (workkkkk!!)
         run: |
@@ -100,56 +90,17 @@ jobs:
           sed -i -e '$a\' comment.md
         
           if diff CoverageReport.md comment.md > /dev/null; then
-            echo "No significant changes detected; skipping comment."
-            echo "skip_comment=true" >> $GITHUB_ENV
+            echo "No significant changes detected; skipping coverage comment."
+            echo "skip_coverage_comment=true" >> $GITHUB_ENV
           else
-            echo "Changes detected; proceeding with the comment."
-            echo "skip_comment=false" >> $GITHUB_ENV
+            echo "Changes detected; proceeding with the coverage comment."
+            echo "skip_coverage_comment=false" >> $GITHUB_ENV
           fi
-
-          if diff CoverageReport.md comment.md; then
-            echo "No significant changes detected; skipping comment."
-            echo "skip_comment=true" >> $GITHUB_ENV
-          else
-            echo "Changes detected; displaying the differences:"
-            diff CoverageReport.md comment.md
-            echo "skip_comment=false" >> $GITHUB_ENV
-          fi
-
-
 
       - name: Upload Coverage Report as PR Comment
+        if: ${{ env.skip_coverage_comment == 'false' }}
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body-path: 'CoverageReport.md'
-      - run: |
-          echo "${{ steps.fc-cr.outputs.comment-body }}" > comment.md
-      
-          # echo "Content of CoverageReport.md:"
-          # echo $(cat CoverageReport.md)
-      
-          # echo "Content of comment.md:"
-          # echo $(cat comment.md)
-      
-          if diff CoverageReport.md comment.md > /dev/null; then
-            echo "No significant changes detected; skipping comment."
-            echo "skip_comment=true" >> $GITHUB_ENV
-          else
-            echo "Changes detected; proceeding with the comment."
-            echo "skip_comment=false" >> $GITHUB_ENV
-          fi
-        
-          # echo "$(cat CoverageReport.md)"
-          # if diff $(cat CoverageReport.md) ${{ steps.fc-cr.outputs.comment-body }} > /dev/null; then
-          #   echo "No significant changes detected; skipping comment."
-          #   echo "skip_comment=true" >> $GITHUB_ENV
-          # else
-          #   echo "Changes detected; proceeding with the comment."
-          #   echo "skip_comment=false" >> $GITHUB_ENV
-          # fi
-          # if [[ "$(cat CoverageReport.md)" == "${{ steps.fc-cr.outputs.comment-body }}" ]]; then
-          #   echo "same"
-          # else
-          #   echo "not same"
-          # fi
+          
