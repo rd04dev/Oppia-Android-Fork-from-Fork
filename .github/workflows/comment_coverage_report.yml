@@ -91,8 +91,8 @@ jobs:
           body-path: 'CoverageReport.md'
       - run:
           echo "$(cat CoverageReport.md)"
-          if [[ "$(cat CoverageReport.md)" == "${{ steps.fc-cr.outputs.comment-body }}" ]]; then
-            echo "same"
-          else
-            echo "not same"
-          fi
+          # if [[ "$(cat CoverageReport.md)" == "${{ steps.fc-cr.outputs.comment-body }}" ]]; then
+          #   echo "same"
+          # else
+          #   echo "not same"
+          # fi
