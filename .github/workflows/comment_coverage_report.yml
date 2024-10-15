@@ -96,6 +96,9 @@ jobs:
       
       - name: Compare coverage report with the comment body (workkkkk!!)
         run: |
+          sed -i -e '$a\' CoverageReport.md
+          sed -i -e '$a\' comment.md
+        
           if diff CoverageReport.md comment.md > /dev/null; then
             echo "No significant changes detected; skipping comment."
             echo "skip_comment=true" >> $GITHUB_ENV
