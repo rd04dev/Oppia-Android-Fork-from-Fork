@@ -104,6 +104,16 @@ jobs:
             echo "skip_comment=false" >> $GITHUB_ENV
           fi
 
+          if diff CoverageReport.md comment.md; then
+            echo "No significant changes detected; skipping comment."
+            echo "skip_comment=true" >> $GITHUB_ENV
+          else
+            echo "Changes detected; displaying the differences:"
+            diff CoverageReport.md comment.md
+            echo "skip_comment=false" >> $GITHUB_ENV
+          fi
+
+
 
       - name: Upload Coverage Report as PR Comment
         uses: peter-evans/create-or-update-comment@v4
