@@ -86,8 +86,8 @@ jobs:
       
       - name: Compare coverage report with the comment body (workkkkk!!)
         run: |        
-          sed -i -e '$a\' CoverageReport.md
-          sed -i -e '$a\' comment.md
+          sed -i '$a\' CoverageReport.md
+          sed -i '$a\' comment.md
           
           if diff --strip-trailing-cr CoverageReport.md comment.md > /dev/null; then
             echo "No significant changes detected; skipping coverage comment."
@@ -98,16 +98,9 @@ jobs:
             echo "skip_coverage_comment=false" >> $GITHUB_ENV
           fi
 
-          echo "Coverage comment md file......."
-          echo "$(cat comment.md)"
-          echo "Coverage Report md file......."
-          echo "$(cat CoverageReport.md)"
-
       - name: Upload Coverage Report as PR Comment
         if: ${{ env.skip_coverage_comment == 'false' }}
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          body-path: 'CoverageReport.md'
-          
-          
+          body-path: 'CoverageReport.md'          
