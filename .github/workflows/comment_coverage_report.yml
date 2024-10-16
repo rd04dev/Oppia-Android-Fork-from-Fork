@@ -86,8 +86,8 @@ jobs:
       
       - name: Compare coverage report with the comment body (workkkkk!!)
         run: |        
-          sed -i -e '$a\' CoverageReport.md
-          sed -i -e '$a\' comment.md
+          sed -i -e ':a' -e '/^\n*$/{$d;N;};/\n$/ba' CoverageReport.md
+          sed -i -e ':a' -e '/^\n*$/{$d;N;};/\n$/ba' comment.md
           
           if diff --strip-trailing-cr CoverageReport.md comment.md > /dev/null; then
             echo "No significant changes detected; skipping coverage comment."
