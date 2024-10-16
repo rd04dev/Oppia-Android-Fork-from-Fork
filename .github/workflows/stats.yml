@@ -42,6 +42,18 @@ jobs:
      ENABLE_CACHING: false
      CACHE_DIRECTORY: ~/.bazel_cache
    steps:
+     - name: Find the last APK AAB Analysis
+       env:
+         PR_NUMBER: ${{ matrix.prInfo.number }}
+       uses: peter-evans/find-comment@v3
+       id: last-apk-aab-analysis
+       with:
+         issue-number: ${{ env.PR_NUMBER }}
+         body-includes: APK & AAB differences analysis
+         direction: last
+     - run: |
+         echo "${{ steps.last-apk-aab-analysis.outputs.comment-body }}" >> apk_aab.log
+          
      - name: Compute PR head owner/repo reference
        env:
          PR_HEAD_REPO: ${{ matrix.prInfo.headRepository.name }}
@@ -202,7 +214,21 @@ jobs:
          echo "FULL_BUILD_SUMMARY_FILE_PATH=$FULL_BUILD_SUMMARY_FILE_PATH" >> "$GITHUB_ENV"
          cp "$GITHUB_WORKSPACE/develop/full_build_summary.log" "$FULL_BUILD_SUMMARY_FILE_PATH"
 
+     - name: Compare apk aab analysis with the previous report
+       run: |        
+         sed -i -e '$a\' ./develop/brief_build_summary.log
+         sed -i -e '$a\' apk_aab.log
+         
+         if diff -B ./develop/brief_build_summary.log apk_aab.log > /dev/null; then
+           echo "No significant changes detected; skipping apk aab analysis comment."
+           echo "skip_apk_aab_comment=true" >> $GITHUB_ENV
+         else
+           echo "Changes detected; proceeding with the apk aab analysis comment."
+           diff ./develop/brief_build_summary.log apk_aab.log || true
+           echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
+
      - name: Add build stats summary comment
+       if: ${{ env.skip_apk_aab_comment == 'false' }}
        env:
          PR_NUMBER: ${{ matrix.prInfo.number }}
        uses: peter-evans/create-or-update-comment@v1
