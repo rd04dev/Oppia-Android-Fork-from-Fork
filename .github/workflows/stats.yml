@@ -226,6 +226,7 @@ jobs:
            echo "Changes detected; proceeding with the apk aab analysis comment."
            diff ./develop/brief_build_summary.log apk_aab.log || true
            echo "skip_apk_aab_comment=false" >> $GITHUB_ENV
+         fi
 
      - name: Add build stats summary comment
        if: ${{ env.skip_apk_aab_comment == 'false' }}
