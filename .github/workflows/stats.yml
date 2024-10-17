@@ -53,12 +53,12 @@ jobs:
          direction: last
      - run: |
          echo "${{ steps.last-apk-aab-analysis.outputs.comment-body }}" >> apk_aab.log
-         echo ${{ steps.fc.outputs.comment-created-at }}
+         echo "Created at - ${{ steps.last-apk-aab-analysis.outputs.comment-created-at }}"
 
      - name: Check for follow-up commits
        env:
          PR_NUMBER: ${{ matrix.prInfo.number }}
-         LAST_ANALYSIS_COMMENT_TIMESTAMP: ${{ steps.fc.outputs.comment-created-at }}
+         LAST_ANALYSIS_COMMENT_TIMESTAMP: ${{ steps.last-apk-aab-analysis.outputs.comment-created-at }}
        run: |
          commits=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                    -H "X-GitHub-Api-Version: 2022-11-28" \
