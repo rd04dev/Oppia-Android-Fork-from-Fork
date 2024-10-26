@@ -55,6 +55,18 @@ jobs:
          echo "${{ steps.last-apk-aab-analysis.outputs.comment-body }}" >> apk_aab.log
          echo "Created at - ${{ steps.last-apk-aab-analysis.outputs.comment-created-at }}"
 
+     - name: Check for new commits via script 
+       id: check_commits
+       uses: actions/github-script@v6
+       with:
+          script: |
+            const commits = await github.paginate(github.rest.pulls.listCommits, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: ${{ matrix.prInfo.number }},
+            });
+            console.log("Commits from script - ${commits}")
+
      - name: Check for follow-up commits
        env:
          PR_NUMBER: ${{ matrix.prInfo.number }}
