@@ -65,7 +65,7 @@ jobs:
               repo: context.repo.repo,
               pull_number: ${{ matrix.prInfo.number }},
             });
-            console.log("Commits from script - ${commits}")
+            console.log(`Commits from script - ${commits}`)
 
      - name: Check for follow-up commits
        env:
