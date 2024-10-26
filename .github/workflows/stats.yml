@@ -62,7 +62,7 @@ jobs:
        run: |
          commits=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                    -H "X-GitHub-Api-Version: 2022-11-28" \
-                   "https://api.github.com/repos/Rd4dev/Oppia-Android-Fork-from-Fork/pulls/${{ env.PR_NUMBER }}/commits?since=${{ steps.last-apk-aab-analysis.outputs.comment-created-at }}"
+                   "https://api.github.com/repos/Rd4dev/Oppia-Android-Fork-from-Fork/pulls/${{ env.PR_NUMBER }}/commits?since=${{ steps.last-apk-aab-analysis.outputs.comment-created-at }}")
 
          echo "Commits: $commits"
          new_commits=$(echo "$commits" | jq -r --arg comment_date "$LAST_ANALYSIS_COMMENT_TIMESTAMP" \
