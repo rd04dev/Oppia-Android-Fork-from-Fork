@@ -63,7 +63,7 @@ jobs:
             const commits = await github.paginate(github.rest.pulls.listCommits, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: ${{ matrix.prInfo.number }},
+              pull_number: 2,
             });
             console.log(`Commits from script - ${JSON.stringify(commits, null, 2)}`);
 
