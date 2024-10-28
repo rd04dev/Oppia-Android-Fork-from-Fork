@@ -65,6 +65,7 @@ jobs:
               repo: context.repo.repo,
               pull_number: 2,
             });
+            console.log(`Commits count - ${commits.length}`);
             console.log(`Commits from script - ${JSON.stringify(commits, null, 2)}`);
 
      - name: Check for follow-up commits
