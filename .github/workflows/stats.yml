@@ -68,7 +68,7 @@ jobs:
             console.log(`Commits count - ${commits.length}`);
             console.log(`Commits from script - ${JSON.stringify(commits, null, 2)}`);
 
-            const recentCommits = commits.filter(commit => new Date(commit.commit.committer.date) > Date(${{ steps.last-apk-aab-analysis.outputs.comment-created-at }}));
+            const recentCommits = commits.filter(commit => new Date(commit.commit.committer.date) > Date("${{ steps.last-apk-aab-analysis.outputs.comment-created-at }}"));
             const recentCommitsCount = recentCommits.length;
 
             console.log(`Recent Commits count - ${recentCommitsCount}`); 
