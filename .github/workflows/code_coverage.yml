@@ -327,20 +327,18 @@ jobs:
 
       - name: Set Conclusion
         run: |
-          if [[ condition ]]; then
-            curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/check-runs \-d '{
-              "name": "My Check",
-              "head_sha": "${{ github.sha }}",
-              "status": "completed",
-              "conclusion": "action_required",
-              "output": {
-                "title": "Action Required",
-                "summary": "This pull request requires manual approval."
-              }
-            }'
-          fi
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/check-runs \-d '{
+            "name": "My Check",
+            "head_sha": "${{ github.sha }}",
+            "status": "completed",
+            "conclusion": "action_required",
+            "output": {
+              "title": "Action Required",
+              "summary": "This pull request requires manual approval."
+            }
+          }'
 
   # Reference: https://github.community/t/127354/7.
   check_coverage_results:
@@ -358,3 +356,18 @@ jobs:
       - name: Check that coverage status is passed
         if: ${{ needs.compute_changed_files.outputs.can_skip_files != 'true' && needs.evaluate_code_coverage_reports.result != 'success' }}
         run: exit 1
+
+      - name: Set Conclusion
+        run: |
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/${{ github.repository }}/check-runs \-d '{
+            "name": "My Check",
+            "head_sha": "${{ github.sha }}",
+            "status": "completed",
+            "conclusion": "action_required",
+            "output": {
+              "title": "Action Required",
+              "summary": "This pull request requires manual approval."
+            }
+          }'
