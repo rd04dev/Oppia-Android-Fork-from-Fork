@@ -325,6 +325,23 @@ jobs:
           name: final-coverage-report
           path: coverage_reports/CoverageReport.md
 
+      - name: Set Conclusion
+        run: |
+          if [[ condition ]]; then
+            curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/check-runs \-d '{
+              "name": "My Check",
+              "head_sha": "${{ github.sha }}",
+              "status": "completed",
+              "conclusion": "action_required",
+              "output": {
+                "title": "Action Required",
+                "summary": "This pull request requires manual approval."
+              }
+            }'
+          fi
+
   # Reference: https://github.community/t/127354/7.
   check_coverage_results:
     name: Check Code Coverage Results
